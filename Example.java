@@ -6,12 +6,15 @@ public class Example {
         Inventory inventory = new Inventory();
 
         //initialise items
-        Weapon weapon_1 = new Weapon("melee", "Sword", 2);
-        Fruit fruit_1 = new Fruit("fuji", "apple", 50);
+        Item item_1 = new Item("thing", 2);
+        //Weapon weapon_1 = new Weapon("melee", "Sword", 2, 15);
+        //Fruit fruit_1 = new Fruit("fuji", "apple", 50);
 
         //add items to inventory
-        inventory.addItem(weapon_1);
-        inventory.addItem(fruit_1);
+        inventory.addItem(item_1);
+        inventory.addItem("melee", "Sword", 2, 15);
+        inventory.addItem("fuji", "apple", 50);
+
 
         //print items in inventory
         inventory.display_Inventory();
@@ -38,6 +41,11 @@ class Item {
      public int get_Amount() {
          return amount;
      }
+
+     @Override
+     public String toString() {
+        return "Item: " + name + ", Quanitity: " + amount;
+     }
 }
 
 class Inventory{
@@ -58,9 +66,20 @@ class Inventory{
         items.add(item);
     }
 
+    //method overload for fruit object
+    public void addItem(String type, String name, int amount) {
+        items.add(new Fruit(type, name, amount));
+    }
+
+    //method overload for weaplon object
+    public void addItem(String type, String name, int amount, int damage) {
+        items.add(new Weapon(type, name, amount, damage));
+    }
+
+    //method displays all items in inventory to command line
     public void display_Inventory() {
         for(Item item : items) {
-            System.out.println("Item: " + item.get_Name() + ", Amount: " + item.get_Amount());
+            System.out.println(item.toString());
         }
     }
 }
@@ -73,6 +92,11 @@ class Fruit extends Item {
         super(name, amount);
         this.type = type;
     }
+
+    @Override
+     public String toString() {
+        return "Type: " + type + ", Name: " + get_Name() + ", Quanitity: " + get_Amount();
+     }
 }
 
 class Weapon extends Item {
@@ -93,4 +117,9 @@ class Weapon extends Item {
     public String get_Class() {
         return weap_Class;
     }
+
+    @Override
+     public String toString() {
+        return "Class: " + weap_Class + ", Name: " + get_Name() + ", Quanitity: " + get_Amount() + ", Damage: " + dmg;
+     }
 }
