@@ -6,12 +6,12 @@ public class Example {
         Inventory inventory = new Inventory();
 
         //initialise items
-        Item item_1 = new Item("apples", 20);
-        Item item_2 = new Item("sword", 1);
+        Weapon weapon_1 = new Weapon("melee", "Sword", 2);
+        Fruit fruit_1 = new Fruit("fuji", "apple", 50);
 
         //add items to inventory
-        inventory.addItem(item_1);
-        inventory.addItem(item_2);
+        inventory.addItem(weapon_1);
+        inventory.addItem(fruit_1);
 
         //print items in inventory
         inventory.display_Inventory();
@@ -47,7 +47,7 @@ class Inventory{
     //declaring ArrayList 'items', which stores objects from class Example
     private ArrayList<Item> items;
 
-    //constructor for class inventory
+    //constructor
     //assigning value of new, empty arraylist to arraylist declared above
     public Inventory() {
         items = new ArrayList<>();
@@ -65,6 +65,32 @@ class Inventory{
     }
 }
 
-class Fruit {
-    private 
+class Fruit extends Item {
+    private String type;
+
+    //constructor
+    public Fruit(String type, String name, int amount){
+        super(name, amount);
+        this.type = type;
+    }
+}
+
+class Weapon extends Item {
+    private String weap_Class;
+    private int dmg;
+
+    //constructor
+    public Weapon(String weap_Class, String name, int amount, int dmg){
+        super(name, amount);
+        this.weap_Class = weap_Class;
+        this.dmg = dmg;
+    }
+
+    public int get_Damage() {
+        return dmg;
+    }
+
+    public String get_Class() {
+        return weap_Class;
+    }
 }
